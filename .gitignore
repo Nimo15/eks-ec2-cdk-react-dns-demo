@@ -157,3 +157,4 @@ config.conf
 uv.lock
 .venv
 cdk.out*
+aws-auth-patch.yaml
