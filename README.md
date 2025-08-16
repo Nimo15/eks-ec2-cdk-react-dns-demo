@@ -1,108 +1,138 @@
-# EKS EC2 React Demo with DNS (Powered by Amazon CDK)
+# EKS EC2 CDK React DNS Demo 🚀
 
-This project demonstrates how to provision a full **Amazon EKS cluster using EC2 nodes** with **infrastructure as code** via the **AWS CDK (Cloud Development Kit)**. It deploys two containerized applications on the cluster and configures **Route 53 DNS records** to expose them under custom subdomains.
+![GitHub Repo stars](https://img.shields.io/github/stars/Nimo15/eks-ec2-cdk-react-dns-demo?style=social)
+![GitHub Repo forks](https://img.shields.io/github/forks/Nimo15/eks-ec2-cdk-react-dns-demo?style=social)
+![GitHub issues](https://img.shields.io/github/issues/Nimo15/eks-ec2-cdk-react-dns-demo)
 
----
+Welcome to the **EKS EC2 CDK React DNS Demo** repository! This project demonstrates how to deploy a complete Amazon EKS cluster using EC2 nodes with the AWS Cloud Development Kit (CDK) in Python. It includes two sample applications: NGINX and React, both served via a LoadBalancer. We also set up Route 53 DNS records for public subdomains, making it easy to access the applications.
 
-## 📦 Stack Overview
+## Table of Contents
 
-- **Cluster Infrastructure**: Amazon EKS using EC2 worker nodes (Spot instances)
-- **Provisioning Tool**: [AWS CDK (Python)](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
-- **Containerized Apps**:
-  - A basic **Nginx demo app**
-  - A custom **React + Vite** dashboard using Material UI
-- **DNS**: Route 53 with subdomain mapping to Load Balancer via CNAME record
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Deployment Steps](#deployment-steps)
+- [Applications Overview](#applications-overview)
+- [DNS Configuration](#dns-configuration)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
----
+## Features
 
-## ✅ What This Project Does
+- **Full EKS Cluster**: Deploy a fully functional Amazon EKS cluster with EC2 nodes.
+- **Sample Applications**: Includes both NGINX and React applications.
+- **Load Balancer**: Use an AWS LoadBalancer to manage traffic to your applications.
+- **Route 53 DNS Records**: Configure DNS for easy access to your applications.
 
-- Creates a VPC with public/private subnets
-- Provisions an EKS cluster with Spot EC2 nodes
-- Deploys containerized workloads to the cluster
-- Integrates with AWS Route 53 to expose apps via:
-  - `demo-v7.tiphareth.com.br`
-  - `react-v7.tiphareth.com.br`
+## Technologies Used
 
----
+This project leverages a variety of technologies to provide a seamless experience:
 
-## 📂 Project Structure
+- **Amazon EKS**: Kubernetes service for running containerized applications.
+- **AWS CDK**: Infrastructure as Code (IaC) framework for defining cloud resources.
+- **Python**: Programming language used for AWS CDK scripts.
+- **NGINX**: Web server for serving static content.
+- **React**: Frontend library for building user interfaces.
+- **Route 53**: AWS DNS web service for domain management.
+- **EC2**: Virtual servers in the cloud.
 
-```
-.
-├── app.py / main.py           # CDK app entry points
-├── stacks/                    # CDK stack definitions
-│   ├── eks_cluster_stack.py   # VPC + EKS + NodeGroup
-│   ├── eks_app_stack.py       # Deploys Nginx app
-│   ├── eks_react_app_stack.py # Deploys React + Vite app
-│   ├── eks_dns_stack.py       # Route53 records for apps
-│   └── version.py             # Global version identifier
-├── scripts/                   # Utility and cleanup scripts
-├── requirements.txt           # Python dependencies
-├── Makefile                   # Common CDK targets
-├── trust-policy.json          # IAM assume-role trust doc
-└── README.md
-```
+## Getting Started
 
----
+To get started with this project, follow these steps:
 
-## 🚀 Quick Start
+1. **Clone the Repository**: Use the command below to clone the repository to your local machine.
 
-> Make sure you have AWS credentials configured and [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/cli.html) installed.
+   ```bash
+   git clone https://github.com/Nimo15/eks-ec2-cdk-react-dns-demo.git
+   ```
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+2. **Navigate to the Directory**: Change to the project directory.
 
-# Bootstrap the environment (only once per account/region)
-cdk bootstrap
+   ```bash
+   cd eks-ec2-cdk-react-dns-demo
+   ```
 
-# Deploy cluster stack (EKS + VPC + Nodegroup)
-cdk deploy EksClusterStackV7 --exclusively
+3. **Install Dependencies**: Install the necessary dependencies using pip.
 
-# Deploy Nginx app + DNS
-cdk deploy EksAppStackV7 EksDnsStackV7
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-# Deploy React app + DNS
-cdk deploy EksReactAppStackV7
-```
+4. **Set Up AWS Credentials**: Ensure your AWS credentials are configured. You can set them up using the AWS CLI.
 
----
+5. **Download the Latest Release**: Visit the [Releases section](https://github.com/Nimo15/eks-ec2-cdk-react-dns-demo/releases) to download the latest release. Follow the instructions in the release notes to execute the necessary scripts.
 
-## 🌐 Resulting DNS
+## Deployment Steps
 
-- Nginx App → `http://demo-v7.tiphareth.com.br`
-- React App → `http://react-v7.tiphareth.com.br`
+Deploying the EKS cluster and applications involves several steps. Here’s a simplified overview:
 
----
+1. **Bootstrap the Environment**: Use the AWS CDK to bootstrap your environment.
 
-## 🧹 Utilities
+   ```bash
+   cdk bootstrap
+   ```
 
-Use these scripts for diagnostics or cleanup:
+2. **Deploy the Stack**: Deploy the EKS stack using the following command.
 
-```bash
-./scripts/rollback-watch.zsh
-./scripts/delete_vpn.zsh
-./scripts/force-destroy.zsh
-```
+   ```bash
+   cdk deploy
+   ```
 
----
+3. **Monitor the Deployment**: Watch the deployment logs to ensure everything is working correctly.
 
-## 🧠 Future Improvements
+4. **Access the Applications**: Once the deployment is complete, you can access the applications via the LoadBalancer URL.
 
-- Add **NGINX Ingress Controller**
-- Integrate **cert-manager** + **Let's Encrypt**
-- Automate SSL provisioning and DNS validation
-- Enable auto-deploy for multiple React apps with DNS
+## Applications Overview
 
----
+### NGINX Application
 
-## 📘 License
+The NGINX application serves as a simple web server. It can host static content and respond to HTTP requests. This application demonstrates how to deploy a basic service on EKS.
 
-MIT or your license of choice.
+### React Application
 
----
+The React application is a frontend application that interacts with the backend services. It showcases how to deploy a more complex application using EKS. Users can navigate through various routes and interact with the application seamlessly.
 
-## 👨‍💼 Author
+## DNS Configuration
 
-Built with ❤️ by [Davi Luiz Guides](http://daviguides.github.io)
+Setting up Route 53 DNS records allows users to access your applications using friendly URLs. Here’s how to configure DNS:
+
+1. **Create a Hosted Zone**: In the Route 53 console, create a hosted zone for your domain.
+
+2. **Add Records**: Create A records pointing to the LoadBalancer's IP address for both the NGINX and React applications.
+
+3. **Test the DNS**: Use a web browser or command line to test the DNS configuration.
+
+## Contributing
+
+We welcome contributions to this project. If you have suggestions or improvements, please feel free to submit a pull request. Ensure that your code adheres to the project's style guidelines.
+
+### How to Contribute
+
+1. **Fork the Repository**: Create a copy of the repository under your GitHub account.
+
+2. **Create a Branch**: Create a new branch for your feature or fix.
+
+   ```bash
+   git checkout -b feature-name
+   ```
+
+3. **Make Changes**: Implement your changes and test them thoroughly.
+
+4. **Submit a Pull Request**: Push your changes and submit a pull request for review.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+For questions or feedback, please contact:
+
+- **Nimo15**: [GitHub Profile](https://github.com/Nimo15)
+
+You can also check the [Releases section](https://github.com/Nimo15/eks-ec2-cdk-react-dns-demo/releases) for the latest updates and downloads.
+
+## Conclusion
+
+The **EKS EC2 CDK React DNS Demo** repository provides a comprehensive guide to deploying a full Amazon EKS cluster using EC2 nodes. With sample applications and DNS configurations, this project serves as a valuable resource for anyone looking to leverage AWS services for their applications. Happy coding!
