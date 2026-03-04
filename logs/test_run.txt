@@ -1,0 +1,19 @@
+Namespace(lr=0.001, aperture=[4, 4, 4, 4, 4, 4], data_aug=False, dropout=False, basis_batch_size=125, avg_pool=False, threshold_conv=0.95, threshold_linear=0.97, epochs=1, model='AlexNet', dataset='SplitCIFAR100', n_experiences=10, print_freq=100, batch_size=64, aperture_gain=1.0, save_path='./experiments_logs/CL_Conceptors_6593', experiment_name='CL_Conceptors', patience=6, lr_threshold=1e-05, lr_decay=2.0, num_free_dim=0)
+=> Everything will be saved to ./experiments_logs/CL_Conceptors_6593/log.log
+Task order = [np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(6), np.int64(7), np.int64(8), np.int64(9)]
+Traceback (most recent call last):
+  File "D:\Gits Analysis\CODE-CL-main\main_splitcifar100.py", line 58, in <module>
+    data, taskcla, inputsize = cf100.get(pc_valid=0.05)
+                               ~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\Gits Analysis\CODE-CL-main\utils\cifar100.py", line 59, in get
+    data[i][s]['x']=torch.load(os.path.join(os.path.expanduser(file_dir),'data'+str(ids[i])+s+'x.bin'))
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Gits Analysis\CODE-CL-main\venv\Lib\site-packages\torch\serialization.py", line 1500, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Gits Analysis\CODE-CL-main\venv\Lib\site-packages\torch\serialization.py", line 768, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "D:\Gits Analysis\CODE-CL-main\venv\Lib\site-packages\torch\serialization.py", line 749, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './Datasets/binary_cifar100\\data0trainx.bin'
